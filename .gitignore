@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Jupyter/runtime cache
+.jupyter_local/
+notebooks/.cache_local/
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+.venv/
+venv/
