@@ -16,6 +16,7 @@ Use this file to document every important field in your dataset. A strong data d
 | Dataset name | OpenSky Flight Data |
 | Source | OpenSky Network API (`/states/all`) |
 | Raw file name | `opensky.csv` |
+| Processed file name | `cleaned_dataset.csv` |
 | Last updated | 2024-03-20 (based on extraction notebook) |
 | Granularity | One row per state vector (per aircraft per timestamp) |
 
