@@ -1,84 +1,65 @@
-# ✈️ OpenSky Global Flight Analysis
+# OpenSky Global Flight Analysis
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Data Dictionary](https://img.shields.io/badge/docs-data%20dictionary-green.svg)](docs/data_dictionary.md)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+End-to-end data pipeline and analytics project built on OpenSky Network state vectors. The workflow ingests raw API data, cleans and validates it, engineers features, and produces Tableau-ready datasets and dashboards.
 
-A comprehensive data engineering and analytics pipeline for processing global aircraft state vectors from the **OpenSky Network**. This project transforms raw API flight data into high-quality, dashboard-ready datasets through a structured 5-stage pipeline.
+## Project Highlights
 
----
+- Flight volume, altitude, and velocity trends
+- Geospatial distributions by country and corridor
+- Feature engineering for ML-ready heading and time fields
+- Tableau dashboards and project reports
 
-## 🚀 Project Overview
+## Repository Layout
 
-This repository contains the end-to-end analysis of real-time flight data. We tackle challenges like sensor noise, missing geospatial data, and high-frequency updates to deliver actionable insights into global air traffic patterns.
-
-### Key KPIs Tracked
-*   **Airborne Volume**: Percentage of aircraft currently in flight vs. on-ground.
-*   **Geospatial Density**: Identification of high-traffic corridors and country-level distributions.
-*   **Flight Profile Analysis**: Vertical rates, altitude distributions, and velocity trends.
-*   **Feature Engineering**: ML-ready transformations including trigonometric heading encoding.
-
----
-
-## 🛠 The Pipeline
-
-The analysis is broken down into five sequential notebooks:
-
-1.  **[01 Extraction](notebooks/01_extraction.ipynb)**: Data ingestion from the OpenSky REST API.
-2.  **[02 Cleaning](notebooks/02_cleaning.ipynb)**: Imputation of missing altitudes/velocities and coordinate pruning.
-3.  **[03 EDA](notebooks/03_eda.ipynb)**: Exploratory analysis of temporal and geospatial flight patterns.
-4.  **[04 Statistical Analysis](notebooks/04_statistical_analysis.ipynb)**: Feature engineering and distribution testing.
-5.  **[05 Final Load Prep](notebooks/05_final_load_prep.ipynb)**: Preparation of the `tableau_ready_dataset.csv`.
-
----
-
-## 📁 Project Structure
-
-```bash
-├── data/
-│   ├── raw/                # Original API extracts (opensky.csv)
-│   └── processed/          # Cleaned & dashboard-ready data
-│       ├── cleaned_dataset.csv
-│       └── tableau_ready_dataset.csv
-├── docs/
-│   └── data_dictionary.md  # Detailed field definitions & cleaning logic
-├── notebooks/              # Modular analysis notebooks (01-05)
-└── README.md               # You are here
+```
+data/
+  raw/opensky.csv
+  processed/cleaned_dataset.csv
+  processed/tableau_ready_dataset.csv
+docs/data_dictionary.md
+notebooks/01_extraction.ipynb
+notebooks/02_cleaning.ipynb
+notebooks/03_eda.ipynb
+notebooks/04_statistical_analysis.ipynb
+notebooks/05_final_load_prep.ipynb
+reports/OpenSky-Capstone-Report .pdf
+reports/OpenSky-Capstone-Presentation.pdf
+tableau/dashboard_links.md
+tableau/screenshots/
+DVA-focused-Portfolio/
+DVA-oriented-Resume/
 ```
 
----
+## Pipeline Notebooks
 
-## 📖 Documentation
+1. 01_extraction: Collects OpenSky data via the REST API.
+2. 02_cleaning: Cleans and imputes missing fields.
+3. 03_eda: Exploratory data analysis of temporal and spatial patterns.
+4. 04_statistical_analysis: Feature engineering and distribution analysis.
+5. 05_final_load_prep: Prepares the Tableau-ready dataset.
 
-For detailed information on every column, data types, and specific cleaning decisions made during the preprocessing phase, please refer to our **[Data Dictionary](docs/data_dictionary.md)**.
+## Data Dictionary
 
-### Data Quality Highlights
-*   **Mandatory Coordinates**: Rows without latitude/longitude are removed to ensure geospatial accuracy.
-*   **Median Imputation**: Missing barometric and geometric altitudes are imputed using group-wise medians.
-*   **Logical Validation**: Vertical rates are forced to zero for all grounded aircraft.
+Field definitions, cleaning logic, and derived columns are documented in docs/data_dictionary.md.
 
----
+## Tableau Dashboards
 
-## 🔧 Setup & Installation
+Links to the published dashboards are listed in tableau/dashboard_links.md. Screenshots are stored in tableau/screenshots/.
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yatinsingh2007/SectionE_G-8_opensky_analysis.git
-   cd SectionE_G-8_opensky_analysis
-   ```
+## Reports
 
-2. **Install Dependencies**:
-   ```bash
-   pip install pandas numpy matplotlib seaborn scipy
-   ```
+The final report and presentation are available in reports/.
 
-3. **Run the Pipeline**:
-   Start with `notebooks/01_extraction.ipynb` and follow the sequence through `05_final_load_prep.ipynb`.
+## Team Portfolios and Resumes
 
----
+Portfolio links are stored in DVA-focused-Portfolio/. Resumes are stored in DVA-oriented-Resume/.
 
-## 📊 Visualizations
-The final outputs are optimized for **Tableau**. Connect the `tableau_ready_dataset.csv` to your dashboard to visualize live flight profiles and global traffic heatmaps.
+## Setup
 
----
-*Developed as part of the Section E Group 8 Capstone Project.*
+Install the core analysis dependencies:
+
+```
+pip install pandas numpy matplotlib seaborn scipy requests
+```
+
+Run the notebooks in order from 01_extraction through 05_final_load_prep.
